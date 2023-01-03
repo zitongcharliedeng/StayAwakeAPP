@@ -2,12 +2,12 @@
 
 one:
   id: 
-  session_token: MyString
+  access_token: MyString
   refresh_token: MyString
-  session_token_expiry: 2023-01-03 20:27:42
+  access_token_expiry: 2023-01-03 20:27:42
 
 two:
   id: 
-  session_token: MyString
+  access_token: MyString
   refresh_token: MyString
-  session_token_expiry: 2023-01-03 20:27:42
+  access_token_expiry: 2023-01-03 20:27:42

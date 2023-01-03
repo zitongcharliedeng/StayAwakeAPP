@@ -14,9 +14,9 @@ ActiveRecord::Schema.define(version: 2023_01_03_202742) do
 
   create_table "users", force: :cascade do |t|
     t.string "user_id"
-    t.string "session_token"
+    t.string "access_token"
     t.string "refresh_token"
-    t.datetime "session_token_expiry"
+    t.datetime "access_token_expiry"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

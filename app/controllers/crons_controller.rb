@@ -2,22 +2,22 @@ class CronsController < ApplicationController
   require 'rest-client'
 
   # This only needs to be called the first time we add a new user
-  # We will call it manually for now (e.g. via postman) to store their first set of session_token and access_token credentials in DB
+  # We will call it manually for now (e.g. via postman) to store their first set of access_token and access_token credentials in DB
   # Once this first set of tokens is stored, all subsequent attempts to authenticate will use the tokens stored in DB
   def new_user
     user_id = parse_param(params, "user_id")
-    session_token = parse_param(params, "session_token")
+    access_token = parse_param(params, "access_token")
     refresh_token = parse_param(params, "refresh_token")
-    session_token_expiry = parse_param(params, "session_token_expiry")
+    access_token_expiry = parse_param(params, "access_token_expiry")
 
-    @user = User.new(user_id: user_id, session_token: session_token, refresh_token: refresh_token, session_token_expiry: session_token_expiry)
+    @user = User.new(user_id: user_id, access_token: access_token, refresh_token: refresh_token, access_token_expiry: access_token_expiry)
     if @user.save
         p "🎉🎉🎉 User successfully saved 🎉🎉🎉"
     else
         p "There was a problem saving this user"
     end
   end
-
+    
   def start
     user_id = "fillIn"
     access_token = "fillIn"
