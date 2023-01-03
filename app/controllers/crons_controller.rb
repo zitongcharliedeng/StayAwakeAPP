@@ -4,13 +4,18 @@ class CronsController < ApplicationController
   # This only needs to be called the first time we add a new user
   # We will call it manually for now (e.g. via postman) to store their first set of session_token and access_token credentials in DB
   # Once this first set of tokens is stored, all subsequent attempts to authenticate will use the tokens stored in DB
-  def first_time_authentication
-    user_id = parse_param(param, "user_id")
-    session_token = parse_param(param, "session_token")
-    refresh_token = parse_param(param, "refresh_token")
-    session_token_expiry = parse_param(param, "session_token_expiry")
+  def new_user
+    user_id = parse_param(params, "user_id")
+    session_token = parse_param(params, "session_token")
+    refresh_token = parse_param(params, "refresh_token")
+    session_token_expiry = parse_param(params, "session_token_expiry")
 
-    User.new  
+    @user = User.new(user_id: user_id, session_token: session_token, refresh_token: refresh_token, session_token_expiry: session_token_expiry)
+    if @user.save
+        p "🎉🎉🎉 User successfully saved 🎉🎉🎉"
+    else
+        p "There was a problem saving this user"
+    end
   end
 
   def start
@@ -24,7 +29,7 @@ class CronsController < ApplicationController
   private
   def parse_param(params, key)
     param = params[key]
-    if !param do
+    if !param || param == ""
         raise "missing param #{key}"
     end
 
