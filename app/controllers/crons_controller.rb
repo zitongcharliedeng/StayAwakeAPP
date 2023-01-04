@@ -21,7 +21,7 @@ class CronsController < ApplicationController
   def start
     user_id = "B7VF69"
     @user = User.find_by(user_id: user_id)
-    access_token = @user.session_token
+    access_token = @user.access_token
     date = Time.now.strftime("%Y-%m-%d") # date = YYYY-MM-DD
 
     res = JSON.parse(RestClient.get("https://api.fitbit.com/1.2/user/#{user_id}/sleep/date/#{date}.json", headers={authorization: "Bearer #{access_token}"}))
